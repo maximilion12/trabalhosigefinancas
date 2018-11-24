@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3ab9cee0d300438ba6074e146bb038f9" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="FamiliaFariaModel.Conta" Width="1.5" PointX="14.875" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Conta_Pagar" Width="1.5" PointX="9.875" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Conta_Receber" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Setor" Width="1.5" PointX="13.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Solicitacao_de_Compra" Width="2" PointX="10.125" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Tipo_Conta" Width="1.5" PointX="7.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Tipo_Transacao" Width="1.5" PointX="0.875" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Transacao" Width="1.5" PointX="3.125" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Transacao_Conta_Pagar" Width="2" PointX="6" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Transacao_Conta_Receber" Width="2.125" PointX="6" PointY="6.875" IsExpanded="true" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Conta_Setor" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Conta_Pagar_Tipo_Conta" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Solicitacao_de_Compra_Conta_Pagar" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Transacao_Conta_Pagar_Conta_Pagar" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Conta_Receber_Tipo_Conta" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Transacao_Conta_Receber_Conta_Receber" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Solicitacao_de_Compra_Setor" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Transacao_Tipo_Transacao" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Transacao_Conta_Pagar_Transacao" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Transacao_Conta_Receber_Transacao" ManuallyRouted="false" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Transacao_Conta" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Conta_Pagar_Tipo_Conta1" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Pedidos" Width="1.5" PointX="15.5" PointY="4.125" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Produto" Width="1.5" PointX="13.25" PointY="1.25" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Pedidos_Produto" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Pedidos_Setor" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Evento" Width="1.5" PointX="15.5" PointY="0.75" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Evento_Setor" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Vendas" Width="1.5" PointX="7.625" PointY="1.5" />
+        <EntityTypeShape EntityType="FamiliaFariaModel.Registro_De_Venda" Width="1.5" PointX="7" PointY="12.875" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Registro_De_Venda_Conta_Receber" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

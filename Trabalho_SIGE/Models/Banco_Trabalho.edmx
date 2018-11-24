@@ -1,0 +1,1029 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FamiliaFariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Conta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSetor" Type="int" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Conta_Pagar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vencimento" Type="date" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="idTipo" Type="int" Nullable="false" />
+          <Property Name="idSetor" Type="int" />
+        </EntityType>
+        <EntityType Name="Conta_Receber">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vencimento" Type="date" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="idTipo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idEvento" Type="int" Nullable="false" />
+          <Property Name="orcamento" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="gasto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="fornecedor" Type="varchar" MaxLength="150" />
+          <Property Name="idSetor" Type="int" Nullable="false" />
+          <Property Name="data" Type="date" />
+        </EntityType>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSetor" Type="int" Nullable="false" />
+          <Property Name="idProduto" Type="int" Nullable="false" />
+          <Property Name="QTD" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="preco" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="dataCotacao" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registro_De_Venda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codRegistro" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="data" Type="date" Nullable="false" />
+          <Property Name="idContaReceber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Setor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Solicitacao_de_Compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idSetor" Type="int" Nullable="false" />
+          <Property Name="descricao" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="dataPedido" Type="date" Nullable="false" />
+          <Property Name="dataVencimento" Type="date" Nullable="false" />
+          <Property Name="aprovada" Type="bit" Nullable="false" />
+          <Property Name="idContaPagar" Type="int" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Conta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Transacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nome" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTipo" Type="int" Nullable="false" />
+          <Property Name="data" Type="date" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="idConta" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transacao_Conta_Pagar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idConta" Type="int" Nullable="false" />
+          <Property Name="idTransacao" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Transacao_Conta_Receber">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idConta" Type="int" Nullable="false" />
+          <Property Name="idTransacao" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vendas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idVenda" Type="int" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="data" Type="date" />
+        </EntityType>
+        <Association Name="FK_Conta_Pagar_Tipo_Conta">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="0..1" />
+          <End Role="Conta_Pagar" Type="Self.Conta_Pagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conta_Pagar">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conta_Receber_Tipo_Conta">
+          <End Role="Tipo_Conta" Type="Self.Tipo_Conta" Multiplicity="1" />
+          <End Role="Conta_Receber" Type="Self.Conta_Receber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Conta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conta_Receber">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conta_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Conta" Type="Self.Conta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conta">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evento_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Evento" Type="Self.Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Produto">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="idProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Registro_De_Venda_Conta_Receber">
+          <End Role="Conta_Receber" Type="Self.Conta_Receber" Multiplicity="1" />
+          <End Role="Registro_De_Venda" Type="Self.Registro_De_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Receber">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Registro_De_Venda">
+              <PropertyRef Name="idContaReceber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_de_Compra_Conta_Pagar">
+          <End Role="Conta_Pagar" Type="Self.Conta_Pagar" Multiplicity="0..1" />
+          <End Role="Solicitacao_de_Compra" Type="Self.Solicitacao_de_Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Pagar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solicitacao_de_Compra">
+              <PropertyRef Name="idContaPagar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_de_Compra_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Solicitacao_de_Compra" Type="Self.Solicitacao_de_Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solicitacao_de_Compra">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta">
+          <End Role="Conta" Type="Self.Conta" Multiplicity="1" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="idConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Pagar_Conta_Pagar">
+          <End Role="Conta_Pagar" Type="Self.Conta_Pagar" Multiplicity="1" />
+          <End Role="Transacao_Conta_Pagar" Type="Self.Transacao_Conta_Pagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Pagar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Pagar">
+              <PropertyRef Name="idConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Pagar_Transacao">
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="1" />
+          <End Role="Transacao_Conta_Pagar" Type="Self.Transacao_Conta_Pagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Pagar">
+              <PropertyRef Name="idTransacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Receber_Conta_Receber">
+          <End Role="Conta_Receber" Type="Self.Conta_Receber" Multiplicity="1" />
+          <End Role="Transacao_Conta_Receber" Type="Self.Transacao_Conta_Receber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Receber">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Receber">
+              <PropertyRef Name="idConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Receber_Transacao">
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="1" />
+          <End Role="Transacao_Conta_Receber" Type="Self.Transacao_Conta_Receber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Receber">
+              <PropertyRef Name="idTransacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Tipo_Transacao">
+          <End Role="Tipo_Transacao" Type="Self.Tipo_Transacao" Multiplicity="1" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Transacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FamiliaFariaModelStoreContainer">
+          <EntitySet Name="Conta" EntityType="Self.Conta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conta_Pagar" EntityType="Self.Conta_Pagar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conta_Receber" EntityType="Self.Conta_Receber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registro_De_Venda" EntityType="Self.Registro_De_Venda" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Setor" EntityType="Self.Setor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitacao_de_Compra" EntityType="Self.Solicitacao_de_Compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Conta" EntityType="Self.Tipo_Conta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Transacao" EntityType="Self.Tipo_Transacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transacao" EntityType="Self.Transacao" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transacao_Conta_Pagar" EntityType="Self.Transacao_Conta_Pagar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transacao_Conta_Receber" EntityType="Self.Transacao_Conta_Receber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendas" EntityType="Self.Vendas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Conta_Pagar_Tipo_Conta" Association="Self.FK_Conta_Pagar_Tipo_Conta">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Conta_Pagar" EntitySet="Conta_Pagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conta_Receber_Tipo_Conta" Association="Self.FK_Conta_Receber_Tipo_Conta">
+            <End Role="Tipo_Conta" EntitySet="Tipo_Conta" />
+            <End Role="Conta_Receber" EntitySet="Conta_Receber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conta_Setor" Association="Self.FK_Conta_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Conta" EntitySet="Conta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evento_Setor" Association="Self.FK_Evento_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Produto" Association="Self.FK_Pedidos_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Setor" Association="Self.FK_Pedidos_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Registro_De_Venda_Conta_Receber" Association="Self.FK_Registro_De_Venda_Conta_Receber">
+            <End Role="Conta_Receber" EntitySet="Conta_Receber" />
+            <End Role="Registro_De_Venda" EntitySet="Registro_De_Venda" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_de_Compra_Conta_Pagar" Association="Self.FK_Solicitacao_de_Compra_Conta_Pagar">
+            <End Role="Conta_Pagar" EntitySet="Conta_Pagar" />
+            <End Role="Solicitacao_de_Compra" EntitySet="Solicitacao_de_Compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_de_Compra_Setor" Association="Self.FK_Solicitacao_de_Compra_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Solicitacao_de_Compra" EntitySet="Solicitacao_de_Compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta" Association="Self.FK_Transacao_Conta">
+            <End Role="Conta" EntitySet="Conta" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Pagar_Conta_Pagar" Association="Self.FK_Transacao_Conta_Pagar_Conta_Pagar">
+            <End Role="Conta_Pagar" EntitySet="Conta_Pagar" />
+            <End Role="Transacao_Conta_Pagar" EntitySet="Transacao_Conta_Pagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Pagar_Transacao" Association="Self.FK_Transacao_Conta_Pagar_Transacao">
+            <End Role="Transacao" EntitySet="Transacao" />
+            <End Role="Transacao_Conta_Pagar" EntitySet="Transacao_Conta_Pagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Receber_Conta_Receber" Association="Self.FK_Transacao_Conta_Receber_Conta_Receber">
+            <End Role="Conta_Receber" EntitySet="Conta_Receber" />
+            <End Role="Transacao_Conta_Receber" EntitySet="Transacao_Conta_Receber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Receber_Transacao" Association="Self.FK_Transacao_Conta_Receber_Transacao">
+            <End Role="Transacao" EntitySet="Transacao" />
+            <End Role="Transacao_Conta_Receber" EntitySet="Transacao_Conta_Receber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Tipo_Transacao" Association="Self.FK_Transacao_Tipo_Transacao">
+            <End Role="Tipo_Transacao" EntitySet="Tipo_Transacao" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FamiliaFariaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Conta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSetor" Type="Int32" Nullable="false" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Setor" Relationship="Self.FK_Conta_Setor" FromRole="Conta" ToRole="Setor" />
+          <NavigationProperty Name="Transacao" Relationship="FamiliaFariaModel.FK_Transacao_Conta" FromRole="Conta" ToRole="Transacao" />
+        </EntityType>
+        <EntityType Name="Conta_Pagar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vencimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="idTipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tipo_Conta" Relationship="Self.FK_Conta_Pagar_Tipo_Conta" FromRole="Conta_Pagar" ToRole="Tipo_Conta" />
+          <NavigationProperty Name="Solicitacao_de_Compra" Relationship="Self.FK_Solicitacao_de_Compra_Conta_Pagar" FromRole="Conta_Pagar" ToRole="Solicitacao_de_Compra" />
+          <NavigationProperty Name="Transacao_Conta_Pagar" Relationship="Self.FK_Transacao_Conta_Pagar_Conta_Pagar" FromRole="Conta_Pagar" ToRole="Transacao_Conta_Pagar" />
+          <Property Name="idSetor" Type="Int32" />
+          <NavigationProperty Name="Setor" Relationship="FamiliaFariaModel.FK_Conta_Pagar_Tipo_Conta1" FromRole="Conta_Pagar" ToRole="Setor" />
+        </EntityType>
+        <EntityType Name="Conta_Receber">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vencimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="idTipo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tipo_Conta" Relationship="Self.FK_Conta_Receber_Tipo_Conta" FromRole="Conta_Receber" ToRole="Tipo_Conta" />
+          <NavigationProperty Name="Transacao_Conta_Receber" Relationship="Self.FK_Transacao_Conta_Receber_Conta_Receber" FromRole="Conta_Receber" ToRole="Transacao_Conta_Receber" />
+          <NavigationProperty Name="Registro_De_Venda" Relationship="FamiliaFariaModel.FK_Registro_De_Venda_Conta_Receber" FromRole="Conta_Receber" ToRole="Registro_De_Venda" />
+        </EntityType>
+        <EntityType Name="Setor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conta" Relationship="Self.FK_Conta_Setor" FromRole="Setor" ToRole="Conta" />
+          <NavigationProperty Name="Solicitacao_de_Compra" Relationship="Self.FK_Solicitacao_de_Compra_Setor" FromRole="Setor" ToRole="Solicitacao_de_Compra" />
+          <NavigationProperty Name="Conta_Pagar" Relationship="FamiliaFariaModel.FK_Conta_Pagar_Tipo_Conta1" FromRole="Setor" ToRole="Conta_Pagar" />
+          <NavigationProperty Name="Pedidos" Relationship="FamiliaFariaModel.FK_Pedidos_Setor" FromRole="Setor" ToRole="Pedidos" />
+          <NavigationProperty Name="Evento" Relationship="FamiliaFariaModel.FK_Evento_Setor" FromRole="Setor" ToRole="Evento" />
+        </EntityType>
+        <EntityType Name="Solicitacao_de_Compra">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSetor" Type="Int32" Nullable="false" />
+          <Property Name="descricao" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dataPedido" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dataVencimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="aprovada" Type="Boolean" Nullable="false" />
+          <Property Name="idContaPagar" Type="Int32" />
+          <NavigationProperty Name="Conta_Pagar" Relationship="Self.FK_Solicitacao_de_Compra_Conta_Pagar" FromRole="Solicitacao_de_Compra" ToRole="Conta_Pagar" />
+          <NavigationProperty Name="Setor" Relationship="Self.FK_Solicitacao_de_Compra_Setor" FromRole="Solicitacao_de_Compra" ToRole="Setor" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="Tipo_Conta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conta_Pagar" Relationship="Self.FK_Conta_Pagar_Tipo_Conta" FromRole="Tipo_Conta" ToRole="Conta_Pagar" />
+          <NavigationProperty Name="Conta_Receber" Relationship="Self.FK_Conta_Receber_Tipo_Conta" FromRole="Tipo_Conta" ToRole="Conta_Receber" />
+        </EntityType>
+        <EntityType Name="Tipo_Transacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Transacao" Relationship="Self.FK_Transacao_Tipo_Transacao" FromRole="Tipo_Transacao" ToRole="Transacao" />
+        </EntityType>
+        <EntityType Name="Transacao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTipo" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Tipo_Transacao" Relationship="Self.FK_Transacao_Tipo_Transacao" FromRole="Transacao" ToRole="Tipo_Transacao" />
+          <NavigationProperty Name="Transacao_Conta_Pagar" Relationship="Self.FK_Transacao_Conta_Pagar_Transacao" FromRole="Transacao" ToRole="Transacao_Conta_Pagar" />
+          <NavigationProperty Name="Transacao_Conta_Receber" Relationship="Self.FK_Transacao_Conta_Receber_Transacao" FromRole="Transacao" ToRole="Transacao_Conta_Receber" />
+          <Property Name="idConta" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conta" Relationship="FamiliaFariaModel.FK_Transacao_Conta" FromRole="Transacao" ToRole="Conta" />
+        </EntityType>
+        <EntityType Name="Transacao_Conta_Pagar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idConta" Type="Int32" Nullable="false" />
+          <Property Name="idTransacao" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conta_Pagar" Relationship="Self.FK_Transacao_Conta_Pagar_Conta_Pagar" FromRole="Transacao_Conta_Pagar" ToRole="Conta_Pagar" />
+          <NavigationProperty Name="Transacao" Relationship="Self.FK_Transacao_Conta_Pagar_Transacao" FromRole="Transacao_Conta_Pagar" ToRole="Transacao" />
+        </EntityType>
+        <EntityType Name="Transacao_Conta_Receber">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idConta" Type="Int32" Nullable="false" />
+          <Property Name="idTransacao" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conta_Receber" Relationship="Self.FK_Transacao_Conta_Receber_Conta_Receber" FromRole="Transacao_Conta_Receber" ToRole="Conta_Receber" />
+          <NavigationProperty Name="Transacao" Relationship="Self.FK_Transacao_Conta_Receber_Transacao" FromRole="Transacao_Conta_Receber" ToRole="Transacao" />
+        </EntityType>
+        <Association Name="FK_Conta_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Conta" Type="Self.Conta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conta">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conta_Pagar_Tipo_Conta">
+          <End Role="Tipo_Conta" Type="Self.Tipo_Conta" Multiplicity="1" />
+          <End Role="Conta_Pagar" Type="Self.Conta_Pagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Conta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conta_Pagar">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_de_Compra_Conta_Pagar">
+          <End Role="Conta_Pagar" Type="Self.Conta_Pagar" Multiplicity="0..1" />
+          <End Role="Solicitacao_de_Compra" Type="Self.Solicitacao_de_Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Pagar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solicitacao_de_Compra">
+              <PropertyRef Name="idContaPagar" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Pagar_Conta_Pagar">
+          <End Role="Conta_Pagar" Type="Self.Conta_Pagar" Multiplicity="1" />
+          <End Role="Transacao_Conta_Pagar" Type="Self.Transacao_Conta_Pagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Pagar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Pagar">
+              <PropertyRef Name="idConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conta_Receber_Tipo_Conta">
+          <End Role="Tipo_Conta" Type="Self.Tipo_Conta" Multiplicity="1" />
+          <End Role="Conta_Receber" Type="Self.Conta_Receber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Conta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conta_Receber">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Receber_Conta_Receber">
+          <End Role="Conta_Receber" Type="Self.Conta_Receber" Multiplicity="1" />
+          <End Role="Transacao_Conta_Receber" Type="Self.Transacao_Conta_Receber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Receber">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Receber">
+              <PropertyRef Name="idConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitacao_de_Compra_Setor">
+          <End Role="Setor" Type="Self.Setor" Multiplicity="1" />
+          <End Role="Solicitacao_de_Compra" Type="Self.Solicitacao_de_Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Solicitacao_de_Compra">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Tipo_Transacao">
+          <End Role="Tipo_Transacao" Type="Self.Tipo_Transacao" Multiplicity="1" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Transacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="idTipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Pagar_Transacao">
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="1" />
+          <End Role="Transacao_Conta_Pagar" Type="Self.Transacao_Conta_Pagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Pagar">
+              <PropertyRef Name="idTransacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta_Receber_Transacao">
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="1" />
+          <End Role="Transacao_Conta_Receber" Type="Self.Transacao_Conta_Receber" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transacao">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao_Conta_Receber">
+              <PropertyRef Name="idTransacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Banco_Conexao_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Conta" EntityType="Self.Conta" />
+          <EntitySet Name="Conta_Pagar" EntityType="Self.Conta_Pagar" />
+          <EntitySet Name="Conta_Receber" EntityType="Self.Conta_Receber" />
+          <EntitySet Name="Setor" EntityType="Self.Setor" />
+          <EntitySet Name="Solicitacao_de_Compra" EntityType="Self.Solicitacao_de_Compra" />
+          <EntitySet Name="Tipo_Conta" EntityType="Self.Tipo_Conta" />
+          <EntitySet Name="Tipo_Transacao" EntityType="Self.Tipo_Transacao" />
+          <EntitySet Name="Transacao" EntityType="Self.Transacao" />
+          <EntitySet Name="Transacao_Conta_Pagar" EntityType="Self.Transacao_Conta_Pagar" />
+          <EntitySet Name="Transacao_Conta_Receber" EntityType="Self.Transacao_Conta_Receber" />
+          <AssociationSet Name="FK_Conta_Setor" Association="Self.FK_Conta_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Conta" EntitySet="Conta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conta_Pagar_Tipo_Conta" Association="Self.FK_Conta_Pagar_Tipo_Conta">
+            <End Role="Tipo_Conta" EntitySet="Tipo_Conta" />
+            <End Role="Conta_Pagar" EntitySet="Conta_Pagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_de_Compra_Conta_Pagar" Association="Self.FK_Solicitacao_de_Compra_Conta_Pagar">
+            <End Role="Conta_Pagar" EntitySet="Conta_Pagar" />
+            <End Role="Solicitacao_de_Compra" EntitySet="Solicitacao_de_Compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Pagar_Conta_Pagar" Association="Self.FK_Transacao_Conta_Pagar_Conta_Pagar">
+            <End Role="Conta_Pagar" EntitySet="Conta_Pagar" />
+            <End Role="Transacao_Conta_Pagar" EntitySet="Transacao_Conta_Pagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conta_Receber_Tipo_Conta" Association="Self.FK_Conta_Receber_Tipo_Conta">
+            <End Role="Tipo_Conta" EntitySet="Tipo_Conta" />
+            <End Role="Conta_Receber" EntitySet="Conta_Receber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Receber_Conta_Receber" Association="Self.FK_Transacao_Conta_Receber_Conta_Receber">
+            <End Role="Conta_Receber" EntitySet="Conta_Receber" />
+            <End Role="Transacao_Conta_Receber" EntitySet="Transacao_Conta_Receber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitacao_de_Compra_Setor" Association="Self.FK_Solicitacao_de_Compra_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Solicitacao_de_Compra" EntitySet="Solicitacao_de_Compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Tipo_Transacao" Association="Self.FK_Transacao_Tipo_Transacao">
+            <End Role="Tipo_Transacao" EntitySet="Tipo_Transacao" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Pagar_Transacao" Association="Self.FK_Transacao_Conta_Pagar_Transacao">
+            <End Role="Transacao" EntitySet="Transacao" />
+            <End Role="Transacao_Conta_Pagar" EntitySet="Transacao_Conta_Pagar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta_Receber_Transacao" Association="Self.FK_Transacao_Conta_Receber_Transacao">
+            <End Role="Transacao" EntitySet="Transacao" />
+            <End Role="Transacao_Conta_Receber" EntitySet="Transacao_Conta_Receber" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta" Association="FamiliaFariaModel.FK_Transacao_Conta">
+            <End Role="Conta" EntitySet="Conta" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conta_Pagar_Tipo_Conta1" Association="FamiliaFariaModel.FK_Conta_Pagar_Tipo_Conta1">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Conta_Pagar" EntitySet="Conta_Pagar" />
+          </AssociationSet>
+          <EntitySet Name="Pedidos" EntityType="FamiliaFariaModel.Pedidos" />
+          <EntitySet Name="Produto" EntityType="FamiliaFariaModel.Produto" />
+          <AssociationSet Name="FK_Pedidos_Produto" Association="FamiliaFariaModel.FK_Pedidos_Produto">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pedidos_Setor" Association="FamiliaFariaModel.FK_Pedidos_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <EntitySet Name="Evento" EntityType="FamiliaFariaModel.Evento" />
+          <AssociationSet Name="FK_Evento_Setor" Association="FamiliaFariaModel.FK_Evento_Setor">
+            <End Role="Setor" EntitySet="Setor" />
+            <End Role="Evento" EntitySet="Evento" />
+          </AssociationSet>
+          <EntitySet Name="Vendas" EntityType="FamiliaFariaModel.Vendas" />
+          <EntitySet Name="Registro_De_Venda" EntityType="FamiliaFariaModel.Registro_De_Venda" />
+          <AssociationSet Name="FK_Registro_De_Venda_Conta_Receber" Association="FamiliaFariaModel.FK_Registro_De_Venda_Conta_Receber">
+            <End Role="Conta_Receber" EntitySet="Conta_Receber" />
+            <End Role="Registro_De_Venda" EntitySet="Registro_De_Venda" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_Transacao_Conta">
+          <End Type="FamiliaFariaModel.Conta" Role="Conta" Multiplicity="1" />
+          <End Type="FamiliaFariaModel.Transacao" Role="Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="idConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conta_Pagar_Tipo_Conta1">
+          <End Type="FamiliaFariaModel.Setor" Role="Setor" Multiplicity="0..1" />
+          <End Type="FamiliaFariaModel.Conta_Pagar" Role="Conta_Pagar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Conta_Pagar">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pedidos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idSetor" Type="Int32" Nullable="false" />
+          <Property Name="idProduto" Type="Int32" Nullable="false" />
+          <Property Name="QTD" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="Produto" Relationship="FamiliaFariaModel.FK_Pedidos_Produto" FromRole="Pedidos" ToRole="Produto" />
+          <NavigationProperty Name="Setor" Relationship="FamiliaFariaModel.FK_Pedidos_Setor" FromRole="Pedidos" ToRole="Setor" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nome" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="preco" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="dataCotacao" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Pedidos" Relationship="FamiliaFariaModel.FK_Pedidos_Produto" FromRole="Produto" ToRole="Pedidos" />
+        </EntityType>
+        <Association Name="FK_Pedidos_Produto">
+          <End Type="FamiliaFariaModel.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="FamiliaFariaModel.Pedidos" Role="Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="idProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pedidos_Setor">
+          <End Type="FamiliaFariaModel.Setor" Role="Setor" Multiplicity="1" />
+          <End Type="FamiliaFariaModel.Pedidos" Role="Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Evento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idEvento" Type="Int32" Nullable="false" />
+          <Property Name="orcamento" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="gasto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="fornecedor" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="idSetor" Type="Int32" Nullable="false" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Setor" Relationship="FamiliaFariaModel.FK_Evento_Setor" FromRole="Evento" ToRole="Setor" />
+        </EntityType>
+        <Association Name="FK_Evento_Setor">
+          <End Type="FamiliaFariaModel.Setor" Role="Setor" Multiplicity="1" />
+          <End Type="FamiliaFariaModel.Evento" Role="Evento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Setor">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evento">
+              <PropertyRef Name="idSetor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Vendas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idVenda" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Registro_De_Venda">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codRegistro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="idContaReceber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conta_Receber" Relationship="FamiliaFariaModel.FK_Registro_De_Venda_Conta_Receber" FromRole="Registro_De_Venda" ToRole="Conta_Receber" />
+        </EntityType>
+        <Association Name="FK_Registro_De_Venda_Conta_Receber">
+          <End Type="FamiliaFariaModel.Conta_Receber" Role="Conta_Receber" Multiplicity="1" />
+          <End Type="FamiliaFariaModel.Registro_De_Venda" Role="Registro_De_Venda" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta_Receber">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Registro_De_Venda">
+              <PropertyRef Name="idContaReceber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FamiliaFariaModelStoreContainer" CdmEntityContainer="Banco_Conexao_Entities">
+          <EntitySetMapping Name="Conta">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Conta">
+              <MappingFragment StoreEntitySet="Conta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idSetor" ColumnName="idSetor" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conta_Pagar">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Conta_Pagar">
+              <MappingFragment StoreEntitySet="Conta_Pagar">
+                <ScalarProperty Name="idSetor" ColumnName="idSetor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vencimento" ColumnName="vencimento" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conta_Receber">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Conta_Receber">
+              <MappingFragment StoreEntitySet="Conta_Receber">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="vencimento" ColumnName="vencimento" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Setor">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Setor">
+              <MappingFragment StoreEntitySet="Setor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitacao_de_Compra">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Solicitacao_de_Compra">
+              <MappingFragment StoreEntitySet="Solicitacao_de_Compra">
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idSetor" ColumnName="idSetor" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="dataPedido" ColumnName="dataPedido" />
+                <ScalarProperty Name="dataVencimento" ColumnName="dataVencimento" />
+                <ScalarProperty Name="aprovada" ColumnName="aprovada" />
+                <ScalarProperty Name="idContaPagar" ColumnName="idContaPagar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Conta">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Tipo_Conta">
+              <MappingFragment StoreEntitySet="Tipo_Conta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Transacao">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Tipo_Transacao">
+              <MappingFragment StoreEntitySet="Tipo_Transacao">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacao">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Transacao">
+              <MappingFragment StoreEntitySet="Transacao">
+                <ScalarProperty Name="idConta" ColumnName="idConta" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacao_Conta_Pagar">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Transacao_Conta_Pagar">
+              <MappingFragment StoreEntitySet="Transacao_Conta_Pagar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idConta" ColumnName="idConta" />
+                <ScalarProperty Name="idTransacao" ColumnName="idTransacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacao_Conta_Receber">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Transacao_Conta_Receber">
+              <MappingFragment StoreEntitySet="Transacao_Conta_Receber">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idConta" ColumnName="idConta" />
+                <ScalarProperty Name="idTransacao" ColumnName="idTransacao" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pedidos">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Pedidos">
+              <MappingFragment StoreEntitySet="Pedidos">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="QTD" ColumnName="QTD" />
+                <ScalarProperty Name="idProduto" ColumnName="idProduto" />
+                <ScalarProperty Name="idSetor" ColumnName="idSetor" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produto">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Produto">
+              <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="dataCotacao" ColumnName="dataCotacao" />
+                <ScalarProperty Name="preco" ColumnName="preco" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evento">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Evento">
+              <MappingFragment StoreEntitySet="Evento">
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="idSetor" ColumnName="idSetor" />
+                <ScalarProperty Name="fornecedor" ColumnName="fornecedor" />
+                <ScalarProperty Name="gasto" ColumnName="gasto" />
+                <ScalarProperty Name="orcamento" ColumnName="orcamento" />
+                <ScalarProperty Name="idEvento" ColumnName="idEvento" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendas">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Vendas">
+              <MappingFragment StoreEntitySet="Vendas">
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="idVenda" ColumnName="idVenda" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registro_De_Venda">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Registro_De_Venda">
+              <MappingFragment StoreEntitySet="Registro_De_Venda">
+                <ScalarProperty Name="idContaReceber" ColumnName="idContaReceber" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="codRegistro" ColumnName="codRegistro" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
