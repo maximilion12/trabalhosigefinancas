@@ -31,11 +31,10 @@ namespace Trabalho_SIGE.Controllers
         [ResponseType(typeof(List<ContasPagarPorSetor>))]
         public IHttpActionResult GetCustoMateriaPrima(int mes)
         {
-            Produto saida = db.Produto.Single(p => p.id == 5);
+            Produto saida = db.Produto.Single(p => p.id == 5 && p.dataCotacao.Month == mes);
             if (saida != null)
             {
                 return Json(saida.preco);
-
             }
             else
             {

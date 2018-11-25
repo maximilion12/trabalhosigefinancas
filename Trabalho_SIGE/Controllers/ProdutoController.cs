@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Trabalho_SIGE.Models;
+using Trabalho_SIGE.Models.Entradas;
+using Trabalho_SIGE.Models.POCO;
 
 namespace Trabalho_SIGE.Controllers
 {
@@ -16,14 +18,17 @@ namespace Trabalho_SIGE.Controllers
     {
         private Banco_Conexao_Entities db = new Banco_Conexao_Entities();
 
-        // GET: api/Produto
-        public IQueryable<Produto> GetProduto()
+        [ResponseType(typeof(List<ProdutoPoco>))]
+        public IHttpActionResult GetProduto()
         {
-            return db.Produto;
+            List<ProdutoPoco> saida = new List<ProdutoPoco>();
+
+            db.Produto.OrderBy(p=> p.dataCotacao).ToList().ForEach(p => saida.Add((ProdutoPoco)p));
+
+            return Json(saida);
         }
 
-        // GET: api/Produto/5
-        [ResponseType(typeof(Produto))]
+        [ResponseType(typeof(ProdutoPoco))]
         public IHttpActionResult GetProduto(int id)
         {
             Produto produto = db.Produto.Find(id);
@@ -32,10 +37,21 @@ namespace Trabalho_SIGE.Controllers
                 return NotFound();
             }
 
-            return Ok(produto);
+            return Ok((ProdutoPoco)produto);
         }
 
-        // PUT: api/Produto/5
+        [Route("api/Produto/mes/{mes:int}")]
+        [ResponseType(typeof(List<ProdutoPoco>))]
+        public IHttpActionResult GetProdutoMes(int mes)
+        {
+            List<ProdutoPoco> saida = new List<ProdutoPoco>();
+
+            db.Produto.Where(p=>p.dataCotacao.Month == mes).OrderBy(p => p.dataCotacao).ToList().ForEach(p => saida.Add((ProdutoPoco)p));
+
+            return Json(saida);
+        }
+
+
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProduto(int id, Produto produto)
         {
@@ -70,22 +86,21 @@ namespace Trabalho_SIGE.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Produto
         [ResponseType(typeof(Produto))]
-        public IHttpActionResult PostProduto(Produto produto)
+        public IHttpActionResult PostProduto(ProdutoEntrada produto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            Produto prod = (Produto)produto;
 
-            db.Produto.Add(produto);
+            db.Produto.Add(prod);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = produto.id }, produto);
+            return CreatedAtRoute("DefaultApi", new { id = prod.id }, prod);
         }
 
-        // DELETE: api/Produto/5
         [ResponseType(typeof(Produto))]
         public IHttpActionResult DeleteProduto(int id)
         {
