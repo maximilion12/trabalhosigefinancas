@@ -252,7 +252,11 @@
     <Compile Include="Models\Entradas\SolicitacaoDeCompraPorConta.cs" />
     <Compile Include="Models\POCO\EventoPoco.cs" />
     <Compile Include="Models\POCO\PedidosPoco.cs" />
+    <Compile Include="Models\POCO\ProducaoPoco.cs" />
     <Compile Include="Models\POCO\ProdutoPoco.cs" />
+    <Compile Include="Models\Producao.cs">
+      <DependentUpon>Banco_Trabalho.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Produto.cs">
       <DependentUpon>Banco_Trabalho.tt</DependentUpon>
     </Compile>

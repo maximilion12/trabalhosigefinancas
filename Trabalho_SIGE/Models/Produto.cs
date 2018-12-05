@@ -18,6 +18,7 @@ namespace Trabalho_SIGE.Models
         public Produto()
         {
             this.Pedidos = new HashSet<Pedidos>();
+            this.Producao = new HashSet<Producao>();
         }
     
         public int id { get; set; }
@@ -27,5 +28,7 @@ namespace Trabalho_SIGE.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedidos> Pedidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Producao> Producao { get; set; }
     }
 }

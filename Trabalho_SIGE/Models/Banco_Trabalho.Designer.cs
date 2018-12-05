@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\ab1544\OneDrive\PUC_2018_2\SISTEMAS INTEGRADOS DE GESTÃO EMPRESARIAL\Trabalho\Projeto_Visual\Trabalho_SIGE\Models\Banco_Trabalho.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Matheus\OneDrive\PUC_2018_2\SISTEMAS INTEGRADOS DE GESTÃO EMPRESARIAL\Trabalho\Projeto_Visual\Trabalho_SIGE\Models\Banco_Trabalho.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

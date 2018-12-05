@@ -36,7 +36,9 @@
         <EntityTypeShape EntityType="FamiliaFariaModel.Vendas" Width="1.5" PointX="7.625" PointY="1.5" />
         <EntityTypeShape EntityType="FamiliaFariaModel.Registro_De_Venda" Width="1.5" PointX="7" PointY="12.875" />
         <AssociationConnector Association="FamiliaFariaModel.FK_Registro_De_Venda_Conta_Receber" />
-      </Diagram>
+        <EntityTypeShape EntityType="FamiliaFariaModel.Producao" Width="1.5" PointX="15.5" PointY="11.25" />
+        <AssociationConnector Association="FamiliaFariaModel.FK_Producao_Producao" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

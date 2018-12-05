@@ -14,23 +14,75 @@ namespace Trabalho_SIGE.Controllers
     {
         private Banco_Conexao_Entities db = new Banco_Conexao_Entities();
 
-        [ResponseType(typeof(List<ContasPagarPorSetor>))]
+        [ResponseType(typeof(List<ProducaoPoco>))]
         public IHttpActionResult GetGastosProducao()
         {
-            List<PedidosPoco> saida = new List<PedidosPoco>();
+            List<ProducaoPoco> saida = new List<ProducaoPoco>();
 
-            db.Pedidos.ToList().ForEach(p => saida.Add((PedidosPoco)p));
+            db.Producao.ToList().ForEach(p => saida.Add((ProducaoPoco)p));
+
+            
             return Json(saida);
         }
 
-        [ResponseType(typeof(List<ContasPagarPorSetor>))]
+        [ResponseType(typeof(List<ProducaoPoco>))]
         public IHttpActionResult GetGastosProducao(int mes)
         {
-            List<PedidosPoco> saida = new List<PedidosPoco>();
+            List<ProducaoPoco> saida = new List<ProducaoPoco>();
 
-            db.Pedidos.Where(p=> p.date.ToString("MM") == mes.ToString("MM")).ToList().ForEach(p => saida.Add((PedidosPoco)p));
+            string mesNome ="";
+            switch (mes)
+            {
+                case 1:
+                    mesNome = "Janeiro";
+                    break;
+                case 2:
+                    mesNome = "Fevereiro";
+                    break;
+                case 3:
+                    mesNome = "Março";
+                    break;
+                case 4:
+                    mesNome = "Abril";
+                    break;
+                case 5:
+                    mesNome = "Maio";
+                    break;
+                case 6:
+                    mesNome = "Junho";
+                    break;
+                case 7:
+                    mesNome = "Julho";
+                    break;
+                case 8:
+                    mesNome = "Agosto";
+                    break;
+                case 9:
+                    mesNome = "Outubro";
+                    break;
+                case 10:
+                    mesNome = "Setembro";
+                    break;
+                case 11:
+                    mesNome = "Novembro";
+                    break;
+                case 12:
+                    mesNome = "Dezembro";
+                    break;
+            }
+
+            db.Producao.Where(p=> p.mes == mesNome).ToList().ForEach(p => saida.Add((ProducaoPoco)p));
             return Json(saida);
         }
+
+        //[ResponseType(typeof(List<ProducaoPoco>))]
+        //public IHttpActionResult GetGastosProducao(string mes)
+        //{
+        //    List<ProducaoPoco> saida = new List<ProducaoPoco>();
+
+        //    db.Producao.Where(p => p.mes == mes).ToList().ForEach(p => saida.Add((ProducaoPoco)p));
+        //    return Json(saida);
+        //}
 
 
     }

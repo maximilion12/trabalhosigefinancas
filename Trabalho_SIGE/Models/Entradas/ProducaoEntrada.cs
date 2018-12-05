@@ -7,7 +7,10 @@ namespace Trabalho_SIGE.Models.Entradas
 {
     public class ProducaoEntrada
     {
-        public int idProduto { get; set; }
-        public double qtd { get; set; }
+        public string nomeProduto { get; set; }
+        public int quantidade { get; set; }
+        public string mes { get; set; }
+        public string turno { get; set; }
+        
     }
 }

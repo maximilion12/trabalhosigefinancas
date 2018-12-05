@@ -94,7 +94,8 @@ namespace Trabalho_SIGE.Controllers
             }
         }
 
-        public bool ObtemqtdProdProduzir(string path, int setor)
+        #region Produção
+        public bool ObtemPedidosProducao(string path = @"http://sigepm.azurewebsites.net/getAllProducaoPorMesTurno")
         {
             try
             {
@@ -116,17 +117,27 @@ namespace Trabalho_SIGE.Controllers
 
                             foreach (var item in listaCont)
                             {
-                                Produto solicitacao = db.Produto.SingleOrDefault(p => p.id == item.idProduto);
-                                if (solicitacao != null)
+                                Produto produto = db.Produto.SingleOrDefault(p => p.nome == item.nomeProduto);
+
+                                Producao producao = db.Producao.SingleOrDefault(p => p.mes == item.mes && p.idProduto == produto.id && p.turno == item.turno);
+
+                                if (producao == null)
                                 {
-                                    db.Pedidos.Add(new Pedidos()
+                                    if (produto != null)
                                     {
-                                        idProduto = item.idProduto,
-                                        idSetor = setor,
-                                        QTD = (decimal)item.qtd,
-                                        date = System.DateTime.Now
-                                    });
-                                    db.SaveChanges();
+                                        db.Producao.Add(new Producao()
+                                        {
+                                            idProduto = produto.id,
+                                            quantidade = item.quantidade,
+                                            mes = item.mes,
+                                            turno = item.turno
+                                        });
+                                        db.SaveChanges();
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
                                 }
                                 else
                                 {
@@ -147,6 +158,9 @@ namespace Trabalho_SIGE.Controllers
                 return false;
             }
         }
+
+        #endregion
+
 
         public bool ObtemEventoSetor(string path, int setor)
         {
@@ -244,10 +258,10 @@ namespace Trabalho_SIGE.Controllers
                                         codRegistro = item.idVenda.ToString(),
                                         data = (System.DateTime)item.data,
                                         idContaReceber = novaconta.id,
-                                        valor= (decimal) item.valor
+                                        valor = (decimal)item.valor
                                     });
                                     db.SaveChanges();
-                                    
+
                                     db.Vendas.Add(new Vendas()
                                     {
                                         idVenda = item.idVenda,
@@ -298,12 +312,6 @@ namespace Trabalho_SIGE.Controllers
                 }
                 #endregion
 
-                #region ObtemProduzir
-                if (ObtemqtdProdProduzir(pathqtdProdProduzir, 4))
-                {
-                    saida += "VendasEventOK; ";
-                }
-                #endregion
 
                 #region ObtemEvento
                 if (ObtemEventoSetor(pathEventosRH, 1))

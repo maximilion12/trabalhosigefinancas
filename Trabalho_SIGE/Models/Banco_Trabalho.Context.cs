@@ -40,5 +40,6 @@ namespace Trabalho_SIGE.Models
         public virtual DbSet<Evento> Evento { get; set; }
         public virtual DbSet<Vendas> Vendas { get; set; }
         public virtual DbSet<Registro_De_Venda> Registro_De_Venda { get; set; }
+        public virtual DbSet<Producao> Producao { get; set; }
     }
 }

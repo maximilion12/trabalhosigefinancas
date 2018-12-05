@@ -54,6 +54,16 @@
           <Property Name="QTD" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="Producao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mes" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idProduto" Type="int" Nullable="false" />
+          <Property Name="turno" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="quantidade" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Produto">
           <Key>
             <PropertyRef Name="id" />
@@ -214,6 +224,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Producao_Producao">
+          <End Role="Produto" Type="Self.Produto" Multiplicity="1" />
+          <End Role="Producao" Type="Self.Producao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Producao">
+              <PropertyRef Name="idProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Registro_De_Venda_Conta_Receber">
           <End Role="Conta_Receber" Type="Self.Conta_Receber" Multiplicity="1" />
           <End Role="Registro_De_Venda" Type="Self.Registro_De_Venda" Multiplicity="*" />
@@ -328,6 +350,7 @@
           <EntitySet Name="Conta_Receber" EntityType="Self.Conta_Receber" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Evento" EntityType="Self.Evento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producao" EntityType="Self.Producao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Produto" EntityType="Self.Produto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registro_De_Venda" EntityType="Self.Registro_De_Venda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Setor" EntityType="Self.Setor" Schema="dbo" store:Type="Tables" />
@@ -361,6 +384,10 @@
           <AssociationSet Name="FK_Pedidos_Setor" Association="Self.FK_Pedidos_Setor">
             <End Role="Setor" EntitySet="Setor" />
             <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producao_Producao" Association="Self.FK_Producao_Producao">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Producao" EntitySet="Producao" />
           </AssociationSet>
           <AssociationSet Name="FK_Registro_De_Venda_Conta_Receber" Association="Self.FK_Registro_De_Venda_Conta_Receber">
             <End Role="Conta_Receber" EntitySet="Conta_Receber" />
@@ -717,7 +744,12 @@
             <End Role="Conta_Receber" EntitySet="Conta_Receber" />
             <End Role="Registro_De_Venda" EntitySet="Registro_De_Venda" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Producao" EntityType="FamiliaFariaModel.Producao" />
+          <AssociationSet Name="FK_Producao_Producao" Association="FamiliaFariaModel.FK_Producao_Producao">
+            <End Role="Produto" EntitySet="Produto" />
+            <End Role="Producao" EntitySet="Producao" />
+          </AssociationSet>
+          </EntityContainer>
         <Association Name="FK_Transacao_Conta">
           <End Type="FamiliaFariaModel.Conta" Role="Conta" Multiplicity="1" />
           <End Type="FamiliaFariaModel.Transacao" Role="Transacao" Multiplicity="*" />
@@ -763,6 +795,7 @@
           <Property Name="preco" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="dataCotacao" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Pedidos" Relationship="FamiliaFariaModel.FK_Pedidos_Produto" FromRole="Produto" ToRole="Pedidos" />
+          <NavigationProperty Name="Producao" Relationship="FamiliaFariaModel.FK_Producao_Producao" FromRole="Produto" ToRole="Producao" />
         </EntityType>
         <Association Name="FK_Pedidos_Produto">
           <End Type="FamiliaFariaModel.Produto" Role="Produto" Multiplicity="1" />
@@ -845,7 +878,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Producao">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mes" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idProduto" Type="Int32" Nullable="false" />
+          <Property Name="turno" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="quantidade" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Produto" Relationship="FamiliaFariaModel.FK_Producao_Producao" FromRole="Producao" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK_Producao_Producao">
+          <End Type="FamiliaFariaModel.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="FamiliaFariaModel.Producao" Role="Producao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Producao">
+              <PropertyRef Name="idProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -999,6 +1055,17 @@
                 <ScalarProperty Name="data" ColumnName="data" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="codRegistro" ColumnName="codRegistro" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producao">
+            <EntityTypeMapping TypeName="FamiliaFariaModel.Producao">
+              <MappingFragment StoreEntitySet="Producao">
+                <ScalarProperty Name="quantidade" ColumnName="quantidade" />
+                <ScalarProperty Name="turno" ColumnName="turno" />
+                <ScalarProperty Name="idProduto" ColumnName="idProduto" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
